@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Resume Builder</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 20px;
+      background: #f0f0f0;
+    }
+    .box {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+    }
+    input, textarea, button {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 16px;
+    }
+    .resume {
+      text-align: left;
+      margin-top: 20px;
+      background: #fafafa;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    h3 {
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Resume Builder</h2>
+  <div class="box">
+    <input id="name" placeholder="Name">
+    <input id="email" placeholder="Email">
+    <input id="phone" placeholder="Phone">
+    <textarea id="objective" placeholder="Career Objective"></textarea>
+    <input id="education" placeholder="Education">
+    <textarea id="skills" placeholder="Skills (comma separated)"></textarea>
+    <textarea id="experience" placeholder="Experience"></textarea>
+    <textarea id="projects" placeholder="Projects (one per line)"></textarea>
+    <textarea id="certifications" placeholder="Certifications (one per line)"></textarea>
+    <input id="languages" placeholder="Languages Known (comma separated)">
+    <input id="hobbies" placeholder="Hobbies (comma separated)">
+    <button onclick="build()">Generate Resume</button>
+    
+    <div class="resume" id="resume"></div>
+  </div>
+
+  <script>
+    function build() {
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const phone = document.getElementById("phone").value;
+      const objective = document.getElementById("objective").value;
+      const education = document.getElementById("education").value;
+      const skills = document.getElementById("skills").value.split(",");
+      const experience = document.getElementById("experience").value;
+      const projects = document.getElementById("projects").value.split("\n");
+      const certifications = document.getElementById("certifications").value.split("\n");
+      const languages = document.getElementById("languages").value.split(",");
+      const hobbies = document.getElementById("hobbies").value.split(",");
+
+      document.getElementById("resume").innerHTML = `
+        <h3>${name}</h3>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Objective:</strong><br>${objective}</p>
+        <p><strong>Education:</strong> ${education}</p>
+        
+        <p><strong>Skills:</strong></p>
+        <ul>${skills.map(s => `<li>${s.trim()}</li>`).join("")}</ul>
+
+        <p><strong>Experience:</strong><br>${experience}</p>
+
+        <p><strong>Projects:</strong></p>
+        <ul>${projects.map(p => `<li>${p.trim()}</li>`).join("")}</ul>
+
+        <p><strong>Certifications:</strong></p>
+        <ul>${certifications.map(c => `<li>${c.trim()}</li>`).join("")}</ul>
+
+        <p><strong>Languages Known:</strong></p>
+        <ul>${languages.map(l => `<li>${l.trim()}</li>`).join("")}</ul>
+
+        <p><strong>Hobbies:</strong></p>
+        <ul>${hobbies.map(h => `<li>${h.trim()}</li>`).join("")}</ul>
+      `;
+    }
+  </script>
+</body>
+</html>

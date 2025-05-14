@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Full Marksheet Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef;
+      text-align: center;
+      padding: 20px;
+    }
+    .box {
+      background: white;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+      border-radius: 10px;
+    }
+    input, button {
+      width: 90%;
+      padding: 10px;
+      margin: 5px 0;
+    }
+    .result {
+      margin-top: 20px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Full Marksheet Generator</h2>
+
+  <div class="box">
+    <input id="name" placeholder="Student Name">
+    <input id="father" placeholder="Father's Name">
+    <input id="mother" placeholder="Mother's Name">
+    <input id="roll" placeholder="Roll Number">
+    <input id="admission" placeholder="Admission Number">
+    <input id="school" placeholder="School Address">
+    <input id="center" placeholder="Exam Center">
+    <input id="centerCode" placeholder="Center Code">
+
+    <input id="sub1Name" placeholder="Subject 1 Name">
+    <input id="sub1Code" placeholder="Subject 1 Code">
+    <input id="sub1Marks" type="number" placeholder="Subject 1 Marks">
+
+    <input id="sub2Name" placeholder="Subject 2 Name">
+    <input id="sub2Code" placeholder="Subject 2 Code">
+    <input id="sub2Marks" type="number" placeholder="Subject 2 Marks">
+
+    <input id="sub3Name" placeholder="Subject 3 Name">
+    <input id="sub3Code" placeholder="Subject 3 Code">
+    <input id="sub3Marks" type="number" placeholder="Subject 3 Marks">
+
+    <button onclick="generateMarksheet()">Show Result</button>
+
+    <div class="result" id="output"></div>
+  </div>
+
+  <script>
+    function generateMarksheet() {
+      let name = document.getElementById("name").value;
+      let father = document.getElementById("father").value;
+      let mother = document.getElementById("mother").value;
+      let roll = document.getElementById("roll").value;
+      let admission = document.getElementById("admission").value;
+      let school = document.getElementById("school").value;
+      let center = document.getElementById("center").value;
+      let centerCode = document.getElementById("centerCode").value;
+
+      let sub1Name = document.getElementById("sub1Name").value;
+      let sub1Code = document.getElementById("sub1Code").value;
+      let sub1Marks = Number(document.getElementById("sub1Marks").value);
+
+      let sub2Name = document.getElementById("sub2Name").value;
+      let sub2Code = document.getElementById("sub2Code").value;
+      let sub2Marks = Number(document.getElementById("sub2Marks").value);
+
+      let sub3Name = document.getElementById("sub3Name").value;
+      let sub3Code = document.getElementById("sub3Code").value;
+      let sub3Marks = Number(document.getElementById("sub3Marks").value);
+
+      let total = sub1Marks + sub2Marks + sub3Marks;
+      let percent = total / 3;
+      let grade = "";
+
+      if (percent >= 90) grade = "A+";
+      else if (percent >= 75) grade = "A";
+      else if (percent >= 60) grade = "B";
+      else if (percent >= 40) grade = "C";
+      else grade = "F";
+
+      document.getElementById("output").innerHTML =
+        `<h3>Marksheet</h3>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Father's Name:</strong> ${father}</p>
+        <p><strong>Mother's Name:</strong> ${mother}</p>
+        <p><strong>Roll No:</strong> ${roll}</p>
+        <p><strong>Admission No:</strong> ${admission}</p>
+        <p><strong>School:</strong> ${school}</p>
+        <p><strong>Exam Center:</strong> ${center} (Code: ${centerCode})</p>
+        <hr>
+        <p><strong>${sub1Name} (${sub1Code}):</strong> ${sub1Marks} marks</p>
+        <p><strong>${sub2Name} (${sub2Code}):</strong> ${sub2Marks} marks</p>
+        <p><strong>${sub3Name} (${sub3Code}):</strong> ${sub3Marks} marks</p>
+        <hr>
+        <p><strong>Total Marks:</strong> ${total}/300</p>
+        <p><strong>Percentage:</strong> ${percent.toFixed(2)}%</p>
+        <p><strong>Grade:</strong> ${grade}</p>`;
+    }
+  </script>
+
+</body>
+</html>

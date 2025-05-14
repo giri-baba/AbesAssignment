@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ID Card Generator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f8ff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 30px;
+    }
+
+    form {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      margin-bottom: 30px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    .generate-btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #cc0700;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .generate-btn:hover {
+      background-color: #a30000;
+    }
+
+    .id-card {
+      background: #ffffffe3;
+      width: 300px;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      display: none;
+    }
+
+    .id-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border: 3px solid #cc0000;
+    }
+
+    .id-card h2 {
+      margin: 0;
+      color: #cc0000;
+    }
+
+    .id-card p {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="idForm">
+    <input type="text" id="name" placeholder="Name" required>
+    <input type="text" id="studentId" placeholder="ID" required>
+    <input type="text" id="course" placeholder="Course" required>
+    <input type="text" id="yearSection" placeholder="Year/Section" required>
+    <input type="text" id="college" placeholder="College" required>
+    <input type="text" id="emailId" placeholder="Email Id" required>
+    <input type="text" id="emergencyNumber" placeholder="Emergency Number" required>
+    <input type="text" id="address" placeholder="Address" required>
+
+    <label for="photo">Upload Photo:</label>
+    <input type="file" id="photo" accept="image/*" required>
+
+    <button type="submit" class="generate-btn">Submit</button>
+  </form>
+
+  <div class="id-card" id="card">
+    <img id="cardPhoto" src="abes.png" alt="ID Photo">
+    <h2 id="cardName">Name</h2>
+    <p id="cardId">ID:</p>
+    <p id="cardCourse">Course:</p>
+    <p id="cardYearSection">Year/Section:</p>
+    <p id="cardCollege">College:</p>
+    <p id="cardEmailId">Email Id:</p>
+    <p id="cardEmergencyNumber">Emergency Number:</p>
+    <p id="cardAddress">Address:</p>
+  </div>
+
+  <script>
+    const form = document.getElementById('idForm');
+    const card = document.getElementById('card');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      document.getElementById('cardName').textContent = document.getElementById('name').value;
+      document.getElementById('cardId').textContent = "ID: " + document.getElementById('studentId').value;
+      document.getElementById('cardCourse').textContent = "Course: " + document.getElementById('course').value;
+      document.getElementById('cardYearSection').textContent = "Year/Section: " + document.getElementById('yearSection').value;
+      document.getElementById('cardCollege').textContent = "College: " + document.getElementById('college').value;
+      document.getElementById('cardEmailId').textContent = "Email Id: " + document.getElementById('emailId').value;
+      document.getElementById('cardEmergencyNumber').textContent = "Emergency Number: " + document.getElementById('emergencyNumber').value;
+      document.getElementById('cardAddress').textContent = "Address: " + document.getElementById('address').value;
+
+      const photoInput = document.getElementById('photo');
+      const photoFile = photoInput.files[0];
+
+      if (photoFile) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('cardPhoto').src = e.target.result;
+        };
+        reader.readAsDataURL(photoFile);
+      }
+
+      card.style.display = 'block';
+    });
+  </script>
+
+</body>
+</html>
